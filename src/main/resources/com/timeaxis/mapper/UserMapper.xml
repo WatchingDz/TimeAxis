@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.timeaxis.mapper.UserMapper">
+
+    <resultMap id="userMap" type="user">
+        <id column="username" property="username"></id>
+        <result column="password" property="password"></result>
+        <result column="nickname" property="nickname"></result>
+        <result column="phone_number" property="phoneNumber"></result>
+        <result column="e_mail" property="email"></result>
+        <result column="head_portrait" property="headPortrait"></result>
+        <result column="institution" property="institution"></result>
+    </resultMap>
+
+    <insert id="save" parameterType="user">
+        insert into user values(#{username},#{password},#{nickname},#{phoneNumber},#{email},#{headPortrait},#{institution})
+    </insert>
+    <select id="findByUsername" resultMap="userMap">
+        select * from user where username= #{username}
+    </select>
+</mapper>

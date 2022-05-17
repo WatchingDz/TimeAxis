@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    用户名<input type="text" name="username" v-model="user.username"><br>
+    密码<input type="password" name="password" v-model="user.password"><br>
+    <button type="button" @click="register"></button>
+</div>
+<script src="./js/vue.js"></script>
+<script src="./js/axios-0.18.0.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                user: {
+                    username: '',
+                    password: '',
+                    nickname: '',
+                    phoneNumber: '',
+                    email: '',
+                    headPortrait: '',
+                    institution: ''
+                }
+            }
+        },
+        methods:{
+            register(){
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/javawebGroup/user/save",
+                    data: this.user    //使用post方式传到后端的是json字符串
+                }).then(function(resp){
+                    if (resp.data==="success"){
+                        alert("success")
+                    }
+                    else if(resp.data==="fail"){
+                        alert("id已占用")
+                    }
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>
